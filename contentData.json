@@ -1,0 +1,542 @@
+{
+  "wms": {
+    "title": "Sistema de Gestión de Almacenes (WMS)",
+    "content": "Bienvenido al módulo de gestión de almacenes. Administra entradas, salidas, ejecución, configuración y más."
+  },
+  "entrada": {
+    "title": "Entrada de Mercancías",
+    "content": "Registra y gestiona las entradas de mercancías en el almacén, incluyendo órdenes de compra y recepciones."
+  },
+  "orden-compra": {
+    "title": "Orden de Compra",
+    "content": "Crea y administra órdenes de compra para nuevos inventarios."
+  },
+  "detalle-oc": {
+    "title": "Detalle de Orden de Compra",
+    "content": "Consulta los detalles específicos de cada orden de compra registrada."
+  },
+  "asn-recepcion": {
+    "title": "ASN/Recepción",
+    "content": "Procesa notificaciones anticipadas de envío (ASN) y gestiona recepciones."
+  },
+  "asn-detalle-recepcion": {
+    "title": "ASN/Detalle de Recepción",
+    "content": "Revisa los detalles de las recepciones de mercancías basadas en ASN."
+  },
+  "graficos-entrada": {
+    "title": "Gráficos de Entrada",
+    "content": "Visualiza estadísticas y gráficos relacionados con las entradas de mercancías."
+  },
+  "consulta-entrada": {
+    "title": "Consulta de Entrada",
+    "content": "Realiza consultas detalladas sobre las entradas registradas en el sistema."
+  },
+  "verificar-cerrar-entrada": {
+    "title": "Verificar/Cerrar Entrada",
+    "content": "Verifica y cierra las entradas de mercancías para confirmar su recepción."
+  },
+  "inversion-recepcion": {
+    "title": "Inversión de Recepción",
+    "content": "Procesa reversiones de recepciones en caso de errores o devoluciones."
+  },
+  "cc-entrada": {
+    "title": "Control de Calidad Entrada",
+    "content": "Realiza controles de calidad para las mercancías recibidas."
+  },
+  "reglas-muestra-cc-entrada": {
+    "title": "Reglas de Muestra CC Entrada",
+    "content": "Configura reglas para muestreos en el control de calidad de entradas."
+  },
+  "registro-cumplimiento-proveedor": {
+    "title": "Registro de Cumplimiento de Proveedor",
+    "content": "Registra y evalúa el cumplimiento de los proveedores en las entregas."
+  },
+  "salida": {
+    "title": "Salida de Mercancías",
+    "content": "Gestiona las salidas de mercancías, incluyendo órdenes de expedición y asignaciones."
+  },
+  "orden-expedicion": {
+    "title": "Orden de Expedición",
+    "content": "Crea y gestiona órdenes de expedición para envíos salientes."
+  },
+  "detalles-expedicion": {
+    "title": "Detalles de la Expedición",
+    "content": "Consulta los detalles específicos de las órdenes de expedición."
+  },
+  "detalles-preparacion": {
+    "title": "Detalles de la Preparación",
+    "content": "Administra los detalles relacionados con la preparación de envíos."
+  },
+  "asignacion-demanda": {
+    "title": "Asignación por Demanda",
+    "content": "Asigna mercancías según la demanda de los clientes."
+  },
+  "graficos-salida": {
+    "title": "Gráficos de Salida",
+    "content": "Visualiza estadísticas y gráficos sobre las salidas de mercancías."
+  },
+  "transferencia-instalacion": {
+    "title": "Transferencia de Instalación",
+    "content": "Gestiona transferencias de mercancías entre diferentes instalaciones."
+  },
+  "detalles-contenedor": {
+    "title": "Detalles del Contenedor",
+    "content": "Consulta la información detallada de los contenedores utilizados en envíos."
+  },
+  "asignaciones-muelles": {
+    "title": "Asignaciones de Muelles",
+    "content": "Administra las asignaciones de muelles para carga y descarga."
+  },
+  "administracion-carga": {
+    "title": "Administración de Carga",
+    "content": "Supervisa y gestiona los procesos de carga de mercancías."
+  },
+  "desasignar": {
+    "title": "Desasignar",
+    "content": "Cancela asignaciones previas de mercancías o muelles."
+  },
+  "paquete-control-calidad": {
+    "title": "Paquete/Control de Calidad",
+    "content": "Realiza controles de calidad para los paquetes preparados para envío."
+  },
+  "control-salida": {
+    "title": "Control de Salida",
+    "content": "Supervisa el proceso de salida de mercancías para garantizar precisión."
+  },
+  "consolidacion": {
+    "title": "Consolidación",
+    "content": "Consolida mercancías para optimizar los envíos."
+  },
+  "expedicion-masiva": {
+    "title": "Expedición Masiva",
+    "content": "Procesa expediciones masivas para múltiples clientes o destinos."
+  },
+  "etiquetas-rfid": {
+    "title": "Etiquetas RFID",
+    "content": "Administra la creación y asignación de etiquetas RFID para seguimiento."
+  },
+  "ejecucion": {
+    "title": "Ejecución de Operaciones",
+    "content": "Supervisa y gestiona las operaciones diarias del almacén."
+  },
+  "stock": {
+    "title": "Stock",
+    "content": "Consulta y administra el inventario actual del almacén."
+  },
+  "productividad-mano-obra": {
+    "title": "Productividad/Mano de Obra",
+    "content": "Analiza la productividad del personal en las operaciones del almacén."
+  },
+  "inventario-rotativo": {
+    "title": "Inventario Rotativo",
+    "content": "Realiza inventarios rotativos para mantener actualizado el stock."
+  },
+  "intercambio-palets": {
+    "title": "Intercambio de Palets",
+    "content": "Gestiona el intercambio de palets entre proveedores y clientes."
+  },
+  "reabastecimiento": {
+    "title": "Reabastecimiento",
+    "content": "Planifica y ejecuta el reabastecimiento de inventario en el almacén."
+  },
+  "ajustes-peso": {
+    "title": "Ajustes de Peso",
+    "content": "Realiza ajustes de peso para garantizar la precisión del inventario."
+  },
+  "opciones-seguimiento": {
+    "title": "Opciones de Seguimiento",
+    "content": "Configura opciones para el seguimiento de mercancías en el almacén."
+  },
+  "graficos-ejecucion": {
+    "title": "Gráficos de Ejecución",
+    "content": "Visualiza estadísticas y gráficos de las operaciones ejecutadas."
+  },
+  "mensajeria": {
+    "title": "Mensajería",
+    "content": "Administra comunicaciones internas y externas relacionadas con el almacén."
+  },
+  "visor-trabajo-visual": {
+    "title": "Visor de Trabajo Visual",
+    "content": "Consulta visualmente el estado de las tareas en curso."
+  },
+  "configuracion": {
+    "title": "Configuración del Sistema",
+    "content": "Configura los parámetros y ajustes del sistema de gestión de almacenes."
+  },
+  "articulo": {
+    "title": "Artículo",
+    "content": "Administra la información de los artículos en el inventario."
+  },
+  "paquete": {
+    "title": "Paquete",
+    "content": "Configura y gestiona los paquetes utilizados en el almacén."
+  },
+  "envases": {
+    "title": "Envases",
+    "content": "Administra los envases utilizados para el empaque de mercancías."
+  },
+  "ubicacion": {
+    "title": "Ubicación",
+    "content": "Configura las ubicaciones físicas dentro del almacén."
+  },
+  "zona": {
+    "title": "Zona",
+    "content": "Define y administra zonas específicas dentro del almacén."
+  },
+  "socio-comercial": {
+    "title": "Socio Comercial",
+    "content": "Gestiona la información de socios comerciales y proveedores."
+  },
+  "estrategias": {
+    "title": "Estrategias",
+    "content": "Configura estrategias para optimizar las operaciones del almacén."
+  },
+  "vincular-ubicacion": {
+    "title": "Vincular con Ubicación",
+    "content": "Asocia artículos o paquetes con ubicaciones específicas en el almacén."
+  },
+  "codigos": {
+    "title": "Códigos",
+    "content": "Administra códigos utilizados para identificación en el sistema."
+  },
+  "productividad": {
+    "title": "Productividad",
+    "content": "Configura métricas y objetivos de productividad para el almacén."
+  },
+  "reglas-validacion": {
+    "title": "Reglas de Validación",
+    "content": "Define reglas para validar procesos dentro del sistema."
+  },
+  "articulo-alternativo": {
+    "title": "Artículo Alternativo",
+    "content": "Administra artículos alternativos para casos de sustitución."
+  },
+  "lista-materiales": {
+    "title": "Lista de Materiales",
+    "content": "Crea y gestiona listas de materiales para producción o ensamblaje."
+  },
+  "estacion-clasificacion": {
+    "title": "Estación de Clasificación",
+    "content": "Configura estaciones para clasificar mercancías en el almacén."
+  },
+  "produccion-zona-espera": {
+    "title": "Producción en Zona de Espera",
+    "content": "Administra la producción en zonas de espera del almacén."
+  },
+  "formatos-codigos-barras": {
+    "title": "Formatos de Códigos de Barras",
+    "content": "Define y gestiona formatos para códigos de barras en el sistema."
+  },
+  "administracion": {
+    "title": "Administración General",
+    "content": "Supervisa y administra configuraciones generales del sistema."
+  },
+  "importaciones": {
+    "title": "Importaciones",
+    "content": "Gestiona la importación de datos al sistema."
+  },
+  "configuracion-sistema": {
+    "title": "Configuración del Sistema",
+    "content": "Ajusta parámetros globales del sistema de gestión."
+  },
+  "administracion-instalacion": {
+    "title": "Administración de Instalación",
+    "content": "Administra la configuración de instalaciones físicas."
+  },
+  "opciones-configuracion": {
+    "title": "Opciones de Configuración",
+    "content": "Personaliza opciones avanzadas del sistema."
+  },
+  "administracion-impresion": {
+    "title": "Administración de Impresión",
+    "content": "Configura opciones de impresión para etiquetas y documentos."
+  },
+  "traduccion-codigo": {
+    "title": "Traducción de Código",
+    "content": "Administra traducciones de códigos para compatibilidad."
+  },
+  "personalizaciones-usuario": {
+    "title": "Personalizaciones de Usuario",
+    "content": "Configura ajustes personalizados para usuarios del sistema."
+  },
+  "actividad-entrante": {
+    "title": "Actividad Entrante",
+    "content": "Supervisa actividades relacionadas con entradas de mercancías."
+  },
+  "actividad-salida": {
+    "title": "Actividad en Salida",
+    "content": "Supervisa actividades relacionadas con salidas de mercancías."
+  },
+  "carga-archivos": {
+    "title": "Carga de Archivos",
+    "content": "Carga archivos al sistema para procesamiento o almacenamiento."
+  },
+  "configuracion-integracion": {
+    "title": "Configuración de Integración",
+    "content": "Configura integraciones con sistemas externos."
+  },
+  "registros-integracion": {
+    "title": "Registros de Integración",
+    "content": "Consulta registros de integraciones realizadas."
+  },
+  "alertas-aplicacion": {
+    "title": "Alertas de la Aplicación",
+    "content": "Configura y revisa alertas generadas por el sistema."
+  },
+  "estatus-trabajo-secundario": {
+    "title": "Estatus de Trabajo Secundario",
+    "content": "Supervisa el estado de trabajos secundarios en el sistema."
+  },
+  "discrepancias-stock": {
+    "title": "Discrepancias de Stock",
+    "content": "Identifica y resuelve discrepancias en el inventario."
+  },
+  "crossdock": {
+    "title": "Crossdock",
+    "content": "Administra operaciones de cross-docking para envíos rápidos."
+  },
+  "reparto-flow-thru": {
+    "title": "Reparto de Flow Thru",
+    "content": "Gestiona el reparto directo de mercancías en cross-docking."
+  },
+  "informes-crossdock": {
+    "title": "Informes de Crossdock",
+    "content": "Consulta informes relacionados con operaciones de cross-docking."
+  },
+  "oportunidades": {
+    "title": "Oportunidades",
+    "content": "Identifica oportunidades para optimizar procesos de cross-docking."
+  },
+  "administracion-crossdock": {
+    "title": "Administración de Crossdock",
+    "content": "Configura y supervisa operaciones de cross-docking."
+  },
+  "orden-trabajo": {
+    "title": "Orden de Trabajo",
+    "content": "Crea y administra órdenes de trabajo para operaciones específicas."
+  },
+  "configuracion-orden": {
+    "title": "Configuración de Orden",
+    "content": "Configura parámetros para órdenes de trabajo."
+  },
+  "operacion": {
+    "title": "Operación",
+    "content": "Define operaciones específicas dentro de órdenes de trabajo."
+  },
+  "centro-trabajo": {
+    "title": "Centro de Trabajo",
+    "content": "Administra centros de trabajo para órdenes específicas."
+  },
+  "lista-materiales-orden": {
+    "title": "Lista de Materiales",
+    "content": "Crea listas de materiales necesarias para órdenes de trabajo."
+  },
+  "rutas": {
+    "title": "Rutas",
+    "content": "Configura rutas para el procesamiento de órdenes de trabajo."
+  },
+  "preferencias-globales": {
+    "title": "Preferencias Globales",
+    "content": "Ajusta configuraciones globales para órdenes de trabajo."
+  },
+  "administracion-orden": {
+    "title": "Administración de Orden",
+    "content": "Supervisa y gestiona órdenes de trabajo activas."
+  },
+  "orden-trabajo-admin": {
+    "title": "Orden de Trabajo",
+    "content": "Administra órdenes de trabajo específicas."
+  },
+  "trabajo": {
+    "title": "Trabajo",
+    "content": "Consulta detalles de trabajos individuales dentro de órdenes."
+  },
+  "cita": {
+    "title": "Citas",
+    "content": "Programa y gestiona citas para recepciones y envíos."
+  },
+  "cita-item": {
+    "title": "Cita",
+    "content": "Crea y configura citas individuales."
+  },
+  "lista-citas": {
+    "title": "Lista de Citas",
+    "content": "Consulta todas las citas programadas."
+  },
+  "remolques": {
+    "title": "Remolques",
+    "content": "Administra información de remolques utilizados en el transporte."
+  },
+  "estatus-remolque": {
+    "title": "Estatus de Remolque",
+    "content": "Supervisa el estado de los remolques en el sistema."
+  },
+  "oleada": {
+    "title": "Gestión de Oleadas",
+    "content": "Planifica y ejecuta oleadas de trabajo en el almacén."
+  },
+  "planificacion-oleada": {
+    "title": "Planificación de Oleada",
+    "content": "Crea planes para oleadas de trabajo en el almacén."
+  },
+  "creador-consultas": {
+    "title": "Creador de Consultas",
+    "content": "Genera consultas personalizadas para la planificación de oleadas."
+  },
+  "grafico-oleada": {
+    "title": "Gráfico de Oleada",
+    "content": "Visualiza gráficos relacionados con la planificación de oleadas."
+  },
+  "ejecucion-oleada": {
+    "title": "Ejecución de Oleada",
+    "content": "Supervisa la ejecución de oleadas de trabajo en el almacén."
+  },
+  "filtros-guardados": {
+    "title": "Filtros Guardados",
+    "content": "Administra filtros guardados para consultas de oleadas."
+  },
+  "mantener-oleadas": {
+    "title": "Mantener Oleadas",
+    "content": "Gestiona y actualiza oleadas de trabajo activas."
+  },
+  "orden-no-oleada": {
+    "title": "Orden no en Oleada",
+    "content": "Consulta órdenes que no están incluidas en oleadas."
+  },
+  "detalles-oleada": {
+    "title": "Detalles de Oleada",
+    "content": "Revisa detalles específicos de las oleadas de trabajo."
+  },
+  "oleadas-consolidadas": {
+    "title": "Oleadas Consolidadas",
+    "content": "Administra oleadas consolidadas para optimizar procesos."
+  },
+  "facturacion": {
+    "title": "Facturación",
+    "content": "Administra procesos de facturación y cargos."
+  },
+  "cargos": {
+    "title": "Cargos",
+    "content": "Registra y gestiona cargos asociados a servicios."
+  },
+  "cargos-instalacion": {
+    "title": "Cargos de Instalación",
+    "content": "Administra cargos específicos por instalaciones."
+  },
+  "mano-obra": {
+    "title": "Gestión de Mano de Obra",
+    "content": "Supervisa y planifica la mano de obra en el almacén."
+  },
+  "estandares-mano-obra": {
+    "title": "Estándares de Mano de Obra",
+    "content": "Define estándares para medir la productividad de la mano de obra."
+  },
+  "operaciones-mano-obra": {
+    "title": "Operaciones de Mano de Obra",
+    "content": "Configura operaciones específicas para la mano de obra."
+  },
+  "condiciones": {
+    "title": "Condiciones",
+    "content": "Define condiciones para las operaciones de mano de obra."
+  },
+  "subelementos": {
+    "title": "Subelementos",
+    "content": "Administra subelementos dentro de las operaciones de mano de obra."
+  },
+  "elementos": {
+    "title": "Elementos",
+    "content": "Configura elementos principales para las operaciones."
+  },
+  "operaciones": {
+    "title": "Operaciones",
+    "content": "Gestiona operaciones individuales de mano de obra."
+  },
+  "selector-operaciones": {
+    "title": "Selector de Operaciones",
+    "content": "Selecciona operaciones específicas para la mano de obra."
+  },
+  "secciones-mano-obra": {
+    "title": "Secciones de Mano de Obra",
+    "content": "Organiza secciones para la gestión de mano de obra."
+  },
+  "seccion-desplazamiento": {
+    "title": "Sección de Desplazamiento",
+    "content": "Administra desplazamientos dentro de las operaciones."
+  },
+  "trazado-lineas": {
+    "title": "Trazado de Líneas",
+    "content": "Configura el trazado de líneas para optimizar flujos."
+  },
+  "transacciones-mano-obra": {
+    "title": "Transacciones de Mano de Obra",
+    "content": "Registra transacciones relacionadas con la mano de obra."
+  },
+  "historial-estandar": {
+    "title": "Historial Estándar",
+    "content": "Consulta el historial de estándares de mano de obra."
+  },
+  "auditoria-viaje-visual": {
+    "title": "Auditoría de Viaje Visual",
+    "content": "Realiza auditorías visuales de los viajes de mano de obra."
+  },
+  "revision-control": {
+    "title": "Revisión de Control",
+    "content": "Supervisa y revisa controles de las operaciones de mano de obra."
+  },
+  "programacion-mano-obra": {
+    "title": "Programación de Mano de Obra",
+    "content": "Planifica horarios y asignaciones para la mano de obra."
+  },
+  "instalacion-programacion": {
+    "title": "Instalación",
+    "content": "Configura programaciones específicas para instalaciones."
+  },
+  "usuario-programacion": {
+    "title": "Usuario",
+    "content": "Administra programaciones por usuario para la mano de obra."
+  },
+  "planificacion-mano-obra": {
+    "title": "Planificación de Mano de Obra",
+    "content": "Crea planes detallados para la gestión de mano de obra."
+  },
+  "administracion-mano-obra": {
+    "title": "Administración de Mano de Obra",
+    "content": "Supervisa y administra todos los aspectos de la mano de obra."
+  },
+  "programacion-admin": {
+    "title": "Programación",
+    "content": "Administra programaciones generales para la mano de obra."
+  },
+  "codigos-motivo": {
+    "title": "Códigos de Motivo",
+    "content": "Define códigos de motivo para las operaciones de mano de obra."
+  },
+  "tipos-actividad": {
+    "title": "Tipos de Actividad",
+    "content": "Configura diferentes tipos de actividades para la mano de obra."
+  },
+  "informes": {
+    "title": "Informes",
+    "content": "Genera y consulta informes sobre las operaciones del almacén."
+  },
+  "informes-item": {
+    "title": "Informes",
+    "content": "Accede a informes detallados sobre diversas áreas del sistema."
+  },
+  "programador": {
+    "title": "Programador",
+    "content": "Administra tareas y trabajos programados en el sistema."
+  },
+  "lista-trabajo": {
+    "title": "Lista de Trabajo",
+    "content": "Consulta todas las tareas pendientes y en progreso."
+  },
+  "trabajos-programados": {
+    "title": "Trabajos Programados",
+    "content": "Revisa los trabajos programados para fechas específicas."
+  },
+  "historial": {
+    "title": "Historial",
+    "content": "Consulta el historial completo de trabajos realizados."
+  }
+}
