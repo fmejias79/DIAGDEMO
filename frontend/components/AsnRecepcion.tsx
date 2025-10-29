@@ -138,7 +138,7 @@ const AsnRecepcion: React.FC = () => {
                 const itemValue = item[key as keyof AsnRecepcionType];
                 if (itemValue === null || itemValue === undefined) return false;
                 // FIX: Ensure itemValue is a string before calling toLowerCase for type safety and to prevent errors.
-                return String(itemValue).toLowerCase().includes(value.toLowerCase());
+                return String(itemValue).toLowerCase().includes(String(value).toLowerCase());
             });
         });
     }, [data, filters]);

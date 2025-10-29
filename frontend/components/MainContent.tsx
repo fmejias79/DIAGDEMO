@@ -2,6 +2,9 @@ import React from 'react';
 import PurchaseOrder from './PurchaseOrder';
 import PurchaseOrderDetail from './PurchaseOrderDetail';
 import AsnRecepcion from './AsnRecepcion';
+import AsnRecepcionDetail from './AsnRecepcionDetail';
+import GraficosEntrada from './GraficosEntrada';
+import ConsultaASN from './ConsultaASN';
 
 interface MainContentProps {
   activePath: string | null;
@@ -17,6 +20,12 @@ const MainContent: React.FC<MainContentProps> = ({ activePath }) => {
         return <PurchaseOrderDetail />;
       case '/wms/entrada/asn':
         return <AsnRecepcion />;
+      case '/wms/entrada/asn-detalle':
+        return <AsnRecepcionDetail />;
+      case '/wms/entrada/graficos':
+        return <GraficosEntrada />;
+      case '/wms/entrada/consulta':
+        return <ConsultaASN />;
       default:
         return (
           <div className="rounded-xl border shadow-sm bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 p-4 sm:p-6 md:p-8">

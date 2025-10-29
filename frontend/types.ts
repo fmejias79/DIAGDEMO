@@ -52,3 +52,21 @@ export interface AsnRecepcion {
   creadoPor: string;
   actualizadoPor: string;
 }
+
+export interface AsnRecepcionDetail {
+  id: string;
+  asnRecepcion: string;
+  linea: number;
+  propietario: string;
+  articulo: string;
+  descripcion: string;
+  paquete: string;
+  udm: string;
+  codigoBloqueo: 'Ninguno' | 'Calidad' | 'Retenido';
+  lpn: string;
+  ubicacion: string;
+  ordenCompra: string;
+  eStatus: 'Activo' | 'Inactivo' | 'Pendiente';
+  cantidadEsperada: number;
+  cantidadRecibida: number;
+}

@@ -109,7 +109,7 @@ const PurchaseOrder: React.FC = () => {
                     return false;
                 }
                 // FIX: The orderValue can be a number, which does not have a `toLowerCase` method. Convert to string to ensure filter works correctly for all data types.
-                return String(orderValue).toLowerCase().includes(value.toLowerCase());
+                return String(orderValue).toLowerCase().includes(String(value).toLowerCase());
             });
         });
     }, [orders, filters]);
