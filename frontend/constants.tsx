@@ -223,6 +223,7 @@ export const MENU_ITEMS: MenuItem[] = [
           { key: 'wms-entrada-inversion', label: 'Inversión de recepción', icon: <RefreshCwIcon style={iconStyle} />, path: '/wms/entrada/inversion' },
           { key: 'wms-entrada-cc', label: 'Entrada CC', icon: <SettingsIcon style={iconStyle} />, path: '/wms/entrada/cc' },
           { key: 'wms-entrada-reglas-cc', label: 'Reglas de muestra CC entrada', icon: <SettingsIcon style={iconStyle} />, path: '/wms/entrada/reglas-cc' },
+          { key: 'wms-entrada-registro-proveedor', label: 'Registro cumplimiento proveedor', icon: <UploadCloudIcon style={iconStyle} />, path: '/wms/entrada/registro-proveedor' },
         ]
       },
       {
