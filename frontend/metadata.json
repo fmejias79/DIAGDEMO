@@ -1,0 +1,5 @@
+{
+  "name": "GIAD Warehouse Management",
+  "description": "A responsive dashboard for a Warehouse Management System (WMS) called GIAD. It features a collapsible sidebar with nested menus, a comprehensive header, and a dynamic main content area, all built with React and Tailwind CSS.",
+  "requestFramePermissions": []
+}

@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./GIAD-darkMode.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GIAD</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {},
+        }
+      }
+    </script>
+    <style>
+      /* Custom Scrollbar Styling for a modern look */
+      /* For WebKit browsers (Chrome, Safari, Edge) */
+      .custom-scrollbar::-webkit-scrollbar {
+        width: 8px; /* Width of the vertical scrollbar */
+        height: 8px; /* Height of the horizontal scrollbar */
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-track {
+        background: transparent; /* Make the track invisible */
+      }
+
+      .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: transparent; /* Hide thumb by default */
+        border-radius: 10px;
+      }
+
+      /* Show scrollbar thumb on hover over the scrollable element */
+      .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+        background-color: #d1d5db; /* Light mode thumb color */
+      }
+
+      .dark .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+        background-color: #4b5563; /* Dark mode thumb color */
+      }
+
+      /* For Firefox */
+      .custom-scrollbar {
+        scrollbar-width: thin; /* Can be "auto", "thin", or "none" */
+        scrollbar-color: transparent transparent; /* thumb color track color */
+      }
+
+      .custom-scrollbar:hover {
+        scrollbar-color: #d1d5db transparent; /* Light mode thumb on hover */
+      }
+
+      .dark .custom-scrollbar:hover {
+        scrollbar-color: #4b5563 transparent; /* Dark mode thumb on hover */
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
