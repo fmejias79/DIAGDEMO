@@ -105,3 +105,47 @@ export interface DetallesExpedicion {
   fechaCreacion: string;
   estrategiaAsignacion: 'FIFO' | 'LIFO' | 'Por Ubicación' | 'Por Lote';
 }
+
+export interface DetallesPreparacion {
+  id: string;
+  numeroOrden: number;
+  numeroLinea: number;
+  idEstuche: string;
+  lote: string;
+  ubicacion: string;
+  lpn: string;
+  propietario: string;
+  articulo: string;
+  cantidad: number;
+  estatus: 'Pendiente' | 'En Proceso' | 'Preparado' | 'Verificado' | 'Completado';
+  idDeposito: string;
+  oleada: string;
+  numeroAsignacion: number;
+  fechaCreacion: string; // YYYY-MM-DD
+  fechaEdicion: string; // YYYY-MM-DD
+}
+
+export interface AsignacionDemanda {
+  id: string;
+  propietario: string;
+  articulo: string;
+  numeroOrden: number;
+  numeroLinea: number;
+  udm: 'UN' | 'KG' | 'LT' | 'M' | 'CJ';
+  cantidadAsignada: number;
+  preparacionEnCurso: number;
+  idContenedor: string;
+  grupoEnvases: string;
+  tipoEnvase: string;
+  ubicacionProduccionZonaEspera: string;
+}
+
+export interface TransferenciaInstalacion {
+    id: string;
+    propietario: string;
+    numeroOrdenTransferencia: number;
+    estatus: 'Pendiente' | 'En Proceso' | 'Completada' | 'Cancelada';
+    numeroReferencia: string;
+    numeroRecepcion: number;
+    fechaExpedicionSolicitada: string; // YYYY-MM-DD
+}

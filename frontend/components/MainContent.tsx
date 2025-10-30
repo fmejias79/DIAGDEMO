@@ -12,7 +12,10 @@ import ReglasMuestraCCEntrada from './entrada/ReglasMuestraCCEntrada';
 import RegistroCumplimientoProveedor from './entrada/RegistroCumplimientoProveedor';
 import OrdenExpedicion from './salida/OrdenExpedicion';
 import DetallesExpedicion from './salida/DetallesExpedicion';
-
+import DetallesPreparacion from './salida/DetallesPreparacion';
+import AsignacionDemanda from './salida/AsignacionDemanda';
+import GraficosSalida from './salida/GraficosSalida';
+import TransferenciaInstalacion from './salida/TransferenciaInstalacion';
 
 interface MainContentProps {
   activePath: string | null;
@@ -48,6 +51,14 @@ const MainContent: React.FC<MainContentProps> = ({ activePath }) => {
         return <OrdenExpedicion />;
       case '/wms/salida/detalles-exp':
         return <DetallesExpedicion />;
+      case '/wms/salida/detalles-prep':
+        return <DetallesPreparacion />;
+      case '/wms/salida/asignacion':
+        return <AsignacionDemanda />;
+      case '/wms/salida/graficos':
+        return <GraficosSalida />;
+      case '/wms/salida/transferencia':
+        return <TransferenciaInstalacion />;
       default:
         return (
           <div className="rounded-xl border shadow-sm bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 p-4 sm:p-6 md:p-8">
