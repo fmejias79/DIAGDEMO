@@ -207,7 +207,7 @@ const iconStyle = { width: 16, height: 16 };
 export const MENU_ITEMS: MenuItem[] = [
   {
     key: 'wms',
-    label: 'Sistema de gestión de almacenes (WMS)',
+    label: 'WMS',
     icon: <PackageIcon style={iconStyle} />,
     subItems: [
       {

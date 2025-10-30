@@ -1,24 +1,10 @@
 import React, { useState, useMemo } from 'react';
-import type { PurchaseOrderDetail as PurchaseOrderDetailType } from '../types';
+import type { PurchaseOrderDetail as PurchaseOrderDetailType } from '../../types';
 import { 
   SaveIcon, RefreshCwIcon, ChevronDownIcon,
   ChevronsLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronsRightIcon,
   MoreVerticalIcon, ArrowUpIcon, ArrowDownIcon, PencilIcon, FileSpreadsheetIcon, MinusIcon
-} from '../constants';
-
-const mockPurchaseOrderDetails: PurchaseOrderDetailType[] = [
-    { id: '1', ordenCompra: 'OC-2024-001', compradorPropietario: 'Juan Pérez', linea: 1, articulo: 'ART-001', descripcion: 'Laptop Pro 15"', paquete: 'UNIDAD', udm: 'PZA', estatus: 'Abierto', cantidadPedida: 10, cantidadRecibida: 5 },
-    { id: '2', ordenCompra: 'OC-2024-001', compradorPropietario: 'Juan Pérez', linea: 2, articulo: 'ART-002', descripcion: 'Mouse Inalámbrico', paquete: 'CAJA_10', udm: 'PZA', estatus: 'Abierto', cantidadPedida: 20, cantidadRecibida: 20 },
-    { id: '3', ordenCompra: 'OC-2024-002', compradorPropietario: 'Maria García', linea: 1, articulo: 'ART-003', descripcion: 'Teclado Mecánico', paquete: 'UNIDAD', udm: 'PZA', estatus: 'Cerrado', cantidadPedida: 15, cantidadRecibida: 15 },
-    { id: '4', ordenCompra: 'OC-2024-003', compradorPropietario: 'Juan Pérez', linea: 1, articulo: 'ART-004', descripcion: 'Monitor 27" 4K', paquete: 'UNIDAD', udm: 'PZA', estatus: 'Abierto', cantidadPedida: 5, cantidadRecibida: 0 },
-    { id: '5', ordenCompra: 'OC-2024-003', compradorPropietario: 'Juan Pérez', linea: 2, articulo: 'ART-005', descripcion: 'Webcam HD', paquete: 'UNIDAD', udm: 'PZA', estatus: 'Abierto', cantidadPedida: 10, cantidadRecibida: 0 },
-    { id: '6', ordenCompra: 'OC-2024-004', compradorPropietario: 'Ana Torres', linea: 1, articulo: 'ART-006', descripcion: 'Docking Station USB-C', paquete: 'UNIDAD', udm: 'PZA', estatus: 'Cancelado', cantidadPedida: 8, cantidadRecibida: 0 },
-    { id: '7', ordenCompra: 'OC-2024-005', compradorPropietario: 'Carlos Ruiz', linea: 1, articulo: 'ART-007', descripcion: 'Silla Ergonómica', paquete: 'UNIDAD', udm: 'PZA', estatus: 'Cerrado', cantidadPedida: 12, cantidadRecibida: 12 },
-    { id: '8', ordenCompra: 'OC-2024-005', compradorPropietario: 'Carlos Ruiz', linea: 2, articulo: 'ART-008', descripcion: 'Escritorio Eléctrico', paquete: 'UNIDAD', udm: 'PZA', estatus: 'Cerrado', cantidadPedida: 12, cantidadRecibida: 12 },
-    { id: '9', ordenCompra: 'OC-2024-006', compradorPropietario: 'Maria García', linea: 1, articulo: 'ART-009', descripcion: 'Filtro de Privacidad', paquete: 'PAQUETE_5', udm: 'PZA', estatus: 'Abierto', cantidadPedida: 50, cantidadRecibida: 25 },
-    { id: '10', ordenCompra: 'OC-2024-007', compradorPropietario: 'Juan Pérez', linea: 1, articulo: 'ART-010', descripcion: 'Disco Duro SSD 1TB', paquete: 'UNIDAD', udm: 'PZA', estatus: 'Abierto', cantidadPedida: 30, cantidadRecibida: 0 },
-];
-
+} from '../../constants';
 
 const estatusOptions: PurchaseOrderDetailType['estatus'][] = ['Abierto', 'Cerrado', 'Cancelado'];
 
@@ -53,7 +39,7 @@ const ActionButton: React.FC<{ icon: React.ReactNode, primary?: boolean, [key: s
 );
 
 const PurchaseOrderDetail: React.FC = () => {
-    const [details, setDetails] = useState<PurchaseOrderDetailType[]>(mockPurchaseOrderDetails);
+    const [details, setDetails] = useState<PurchaseOrderDetailType[]>([]);
     const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
     const [sortConfig, setSortConfig] = useState<{ key: SortableKeys; direction: 'ascending' | 'descending' } | null>(null);
     const [filters, setFilters] = useState<Record<string, string>>({});
@@ -130,7 +116,7 @@ const PurchaseOrderDetail: React.FC = () => {
                     return false;
                 }
                 // FIX: The detailValue can be a number, which does not have a `toLowerCase` method. Convert to string to ensure filter works correctly for all data types.
-                return String(detailValue).toLowerCase().includes(value.toLowerCase());
+                return String(detailValue).toLowerCase().includes(String(value).toLowerCase());
             });
         });
     }, [details, filters]);

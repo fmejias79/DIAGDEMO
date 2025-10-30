@@ -1,19 +1,10 @@
 import React, { useState, useMemo } from 'react';
-import type { AsnRecepcionDetail as DetailType } from '../types';
+import type { AsnRecepcionDetail as DetailType } from '../../types';
 import { 
   SaveIcon, RefreshCwIcon, ChevronDownIcon,
   ChevronsLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronsRightIcon,
   MoreVerticalIcon, ArrowUpIcon, ArrowDownIcon, PencilIcon, FileSpreadsheetIcon, MinusIcon
-} from '../constants';
-
-const mockDetails: DetailType[] = [
-    { id: '1', asnRecepcion: 'ASN-001', linea: 1, propietario: 'Juan Pérez', articulo: 'ART-001', descripcion: 'Laptop Pro 15"', paquete: 'UNIDAD', udm: 'PZA', codigoBloqueo: 'Ninguno', lpn: 'LPN001', ubicacion: 'A1-01-01', ordenCompra: 'OC-2024-001', eStatus: 'Activo', cantidadEsperada: 10, cantidadRecibida: 10 },
-    { id: '2', asnRecepcion: 'ASN-001', linea: 2, propietario: 'Juan Pérez', articulo: 'ART-002', descripcion: 'Mouse Inalámbrico', paquete: 'CAJA_10', udm: 'PZA', codigoBloqueo: 'Ninguno', lpn: 'LPN002', ubicacion: 'A1-01-02', ordenCompra: 'OC-2024-001', eStatus: 'Activo', cantidadEsperada: 20, cantidadRecibida: 15 },
-    { id: '3', asnRecepcion: 'ASN-002', linea: 1, propietario: 'Maria García', articulo: 'ART-003', descripcion: 'Teclado Mecánico', paquete: 'UNIDAD', udm: 'PZA', codigoBloqueo: 'Calidad', lpn: 'LPN003', ubicacion: 'B2-03-04', ordenCompra: 'OC-2024-002', eStatus: 'Pendiente', cantidadEsperada: 15, cantidadRecibida: 0 },
-    { id: '4', asnRecepcion: 'ASN-003', linea: 1, propietario: 'Ana Torres', articulo: 'ART-004', descripcion: 'Monitor 27" 4K', paquete: 'UNIDAD', udm: 'PZA', codigoBloqueo: 'Ninguno', lpn: 'LPN004', ubicacion: 'C3-05-06', ordenCompra: 'OC-2024-003', eStatus: 'Activo', cantidadEsperada: 5, cantidadRecibida: 5 },
-    { id: '5', asnRecepcion: 'ASN-004', linea: 1, propietario: 'Carlos Ruiz', articulo: 'ART-007', descripcion: 'Silla Ergonómica', paquete: 'UNIDAD', udm: 'PZA', codigoBloqueo: 'Retenido', lpn: 'LPN005', ubicacion: 'D4-07-08', ordenCompra: 'OC-2024-004', eStatus: 'Inactivo', cantidadEsperada: 12, cantidadRecibida: 0 },
-    { id: '6', asnRecepcion: 'ASN-006', linea: 1, propietario: 'Maria García', articulo: 'ART-009', descripcion: 'Filtro de Privacidad', paquete: 'PAQUETE_5', udm: 'PZA', codigoBloqueo: 'Ninguno', lpn: 'LPN006', ubicacion: 'F6-09-10', ordenCompra: 'OC-2024-006', eStatus: 'Activo', cantidadEsperada: 50, cantidadRecibida: 50 },
-];
+} from '../../constants';
 
 const codigoBloqueoOptions: DetailType['codigoBloqueo'][] = ['Ninguno', 'Calidad', 'Retenido'];
 const eStatusOptions: DetailType['eStatus'][] = ['Activo', 'Inactivo', 'Pendiente'];
@@ -52,7 +43,7 @@ const ActionButton: React.FC<{ icon: React.ReactNode, primary?: boolean, [key: s
 );
 
 const AsnRecepcionDetail: React.FC = () => {
-    const [details, setDetails] = useState<DetailType[]>(mockDetails);
+    const [details, setDetails] = useState<DetailType[]>([]);
     const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
     const [sortConfig, setSortConfig] = useState<{ key: SortableKeys; direction: 'ascending' | 'descending' } | null>(null);
     const [filters, setFilters] = useState<Record<string, string>>({});

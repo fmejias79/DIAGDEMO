@@ -1,21 +1,11 @@
-import React, { useState, useMemo } from 'react';
-import type { AsnRecepcion as AsnRecepcionType } from '../types';
+import React, { useState, useMemo, useRef, useEffect } from 'react';
+import type { AsnRecepcion as AsnRecepcionType } from '../../types';
 import { 
   SaveIcon, RefreshCwIcon, ChevronDownIcon,
   ChevronsLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronsRightIcon,
   MoreVerticalIcon, ArrowUpIcon, ArrowDownIcon, PencilIcon, MinusIcon, PlusIcon,
   Trash2Icon, ArchiveIcon, DownloadIcon, UploadCloudIcon, HelpCircleIcon, FileTextIcon, CalendarIcon
-} from '../constants';
-
-const mockAsnData: AsnRecepcionType[] = [
-    { id: '1', asnRecepcion: 'ASN-001', propietario: 'Juan Pérez', referenciaAlmacen: 'WH-REF-A1', fechaRecepcionEsperada: '2024-08-10', recepcionExterna: 'EXT-A1', ultimaFechaRecepcion: '2024-08-11', estatusRecepcion: 'Parcialmente Recibido', tipo: 'Estándar', fechaCierre: '2024-08-11', estatusTransporte: 'Entregado', codTransporte: 'TR-123', creadoPor: 'sistema', actualizadoPor: 'jperez' },
-    { id: '2', asnRecepcion: 'ASN-002', propietario: 'Maria García', referenciaAlmacen: 'WH-REF-B2', fechaRecepcionEsperada: '2024-08-12', recepcionExterna: 'EXT-B2', ultimaFechaRecepcion: '', estatusRecepcion: 'Abierto', tipo: 'Urgente', fechaCierre: '', estatusTransporte: 'En Tránsito', codTransporte: 'TR-456', creadoPor: 'sistema', actualizadoPor: 'mgarcia' },
-    { id: '3', asnRecepcion: 'ASN-003', propietario: 'Ana Torres', referenciaAlmacen: 'WH-REF-C3', fechaRecepcionEsperada: '2024-08-15', recepcionExterna: 'EXT-C3', ultimaFechaRecepcion: '2024-08-15', estatusRecepcion: 'Cerrado', tipo: 'Estándar', fechaCierre: '2024-08-15', estatusTransporte: 'Entregado', codTransporte: 'TR-789', creadoPor: 'sistema', actualizadoPor: 'atorres' },
-    { id: '4', asnRecepcion: 'ASN-004', propietario: 'Carlos Ruiz', referenciaAlmacen: 'WH-REF-D4', fechaRecepcionEsperada: '2024-08-18', recepcionExterna: 'EXT-D4', ultimaFechaRecepcion: '', estatusRecepcion: 'Abierto', tipo: 'Devolución', fechaCierre: '', estatusTransporte: 'En Tránsito', codTransporte: 'TR-101', creadoPor: 'sistema', actualizadoPor: 'cruiz' },
-    { id: '5', asnRecepcion: 'ASN-005', propietario: 'Juan Pérez', referenciaAlmacen: 'WH-REF-E5', fechaRecepcionEsperada: '2024-08-20', recepcionExterna: 'EXT-E5', ultimaFechaRecepcion: '', estatusRecepcion: 'Abierto', tipo: 'Estándar', fechaCierre: '', estatusTransporte: 'Retrasado', codTransporte: 'TR-112', creadoPor: 'sistema', actualizadoPor: 'jperez' },
-    { id: '6', asnRecepcion: 'ASN-006', propietario: 'Maria García', referenciaAlmacen: 'WH-REF-F6', fechaRecepcionEsperada: '2024-08-22', recepcionExterna: 'EXT-F6', ultimaFechaRecepcion: '2024-08-21', estatusRecepcion: 'Parcialmente Recibido', tipo: 'Urgente', fechaCierre: '', estatusTransporte: 'Entregado', codTransporte: 'TR-131', creadoPor: 'sistema', actualizadoPor: 'mgarcia' },
-];
-
+} from '../../constants';
 
 const estatusRecepcionStyles: Record<AsnRecepcionType['estatusRecepcion'], string> = {
   'Abierto': 'bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300',
@@ -66,7 +56,7 @@ const ActionButton: React.FC<{ icon: React.ReactNode, primary?: boolean, [key: s
 );
 
 const AsnRecepcion: React.FC = () => {
-    const [data, setData] = useState<AsnRecepcionType[]>(mockAsnData);
+    const [data, setData] = useState<AsnRecepcionType[]>([]);
     const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
     const [sortConfig, setSortConfig] = useState<{ key: SortableKeys; direction: 'ascending' | 'descending' } | null>(null);
     const [filters, setFilters] = useState<Record<string, string>>({});
@@ -74,6 +64,21 @@ const AsnRecepcion: React.FC = () => {
     const itemsPerPage = 10;
     const [editingRowId, setEditingRowId] = useState<string | null>(null);
     const [editedData, setEditedData] = useState<Partial<AsnRecepcionType> | null>(null);
+    const [isAccionesOpen, setIsAccionesOpen] = useState(false);
+    const accionesRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event: MouseEvent) => {
+            if (accionesRef.current && !accionesRef.current.contains(event.target as Node)) {
+                setIsAccionesOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     const handleFilterChange = (key: string, value: string) => {
         setFilters(prev => ({ ...prev, [key]: value }));
@@ -173,7 +178,27 @@ const AsnRecepcion: React.FC = () => {
             <ActionButton icon={<SaveIcon className="w-4 h-4" />} onClick={handleSave}>GUARDAR</ActionButton>
             <ActionButton icon={<Trash2Icon className="w-4 h-4" />}>ELIMINAR</ActionButton>
             <ActionButton icon={<RefreshCwIcon className="w-4 h-4" />}>ACTUALIZAR</ActionButton>
-            <ActionButton icon={<ChevronDownIcon className="w-4 h-4" />}>ACCIONES</ActionButton>
+            <div className="relative inline-block text-left" ref={accionesRef}>
+                <ActionButton 
+                    icon={<ChevronDownIcon className="w-4 h-4" />}
+                    onClick={() => setIsAccionesOpen(prev => !prev)}
+                >
+                    ACCIONES
+                </ActionButton>
+                {isAccionesOpen && (
+                    <div className="origin-top-left absolute left-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-800 ring-1 ring-black ring-opacity-5 focus:outline-none z-20">
+                        <div className="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Recibir todo</a>
+                            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Cerrar ASN/Recepción</a>
+                            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Reabrir ASN/Recepción</a>
+                            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Imprimir etiquetas</a>
+                            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Imprimir etiquetas LPN genéricas</a>
+                            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Aplicar máscara de lote</a>
+                            <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white" role="menuitem">Solicitar transporte</a>
+                        </div>
+                    </div>
+                )}
+            </div>
             <ActionButton icon={<ChevronDownIcon className="w-4 h-4" />}>INFORMES</ActionButton>
             <ActionButton icon={<ArchiveIcon className="w-4 h-4" />}>REGISTROS ELIMINADOS</ActionButton>
         </div>

@@ -1,15 +1,18 @@
 import React from 'react';
-import PurchaseOrder from './PurchaseOrder';
-import PurchaseOrderDetail from './PurchaseOrderDetail';
-import AsnRecepcion from './AsnRecepcion';
-import AsnRecepcionDetail from './AsnRecepcionDetail';
-import GraficosEntrada from './GraficosEntrada';
-import ConsultaASN from './ConsultaASN';
-import VerificarCerrarEntrada from './VerificarCerrarEntrada';
-import InversionRecepcion from './InversionRecepcion';
-import EntradaCC from './EntradaCC';
-import ReglasMuestraCCEntrada from './ReglasMuestraCCEntrada';
-import RegistroCumplimientoProveedor from './RegistroCumplimientoProveedor';
+import PurchaseOrder from './entrada/PurchaseOrder';
+import PurchaseOrderDetail from './entrada/PurchaseOrderDetail';
+import AsnRecepcion from './entrada/AsnRecepcion';
+import AsnRecepcionDetail from './entrada/AsnRecepcionDetail';
+import GraficosEntrada from './entrada/GraficosEntrada';
+import ConsultaASN from './entrada/ConsultaASN';
+import VerificarCerrarEntrada from './entrada/VerificarCerrarEntrada';
+import InversionRecepcion from './entrada/InversionRecepcion';
+import EntradaCC from './entrada/EntradaCC';
+import ReglasMuestraCCEntrada from './entrada/ReglasMuestraCCEntrada';
+import RegistroCumplimientoProveedor from './entrada/RegistroCumplimientoProveedor';
+import OrdenExpedicion from './salida/OrdenExpedicion';
+import DetallesExpedicion from './salida/DetallesExpedicion';
+
 
 interface MainContentProps {
   activePath: string | null;
@@ -41,6 +44,10 @@ const MainContent: React.FC<MainContentProps> = ({ activePath }) => {
         return <ReglasMuestraCCEntrada />;
       case '/wms/entrada/registro-proveedor':
         return <RegistroCumplimientoProveedor />;
+      case '/wms/salida/orden':
+        return <OrdenExpedicion />;
+      case '/wms/salida/detalles-exp':
+        return <DetallesExpedicion />;
       default:
         return (
           <div className="rounded-xl border shadow-sm bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 p-4 sm:p-6 md:p-8">

@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 import { 
     PlusIcon, SaveIcon, Trash2Icon, UploadCloudIcon, DownloadIcon, ChevronsLeftIcon, ChevronLeftIcon, 
     ChevronRightIcon, ChevronsRightIcon, RefreshCwIcon, HelpCircleIcon, MinusIcon, MoreVerticalIcon, ArrowUpIcon, ArrowDownIcon
-} from '../constants';
+} from '../../constants';
 
 // Types
 type BooleanSelect = 'Sí' | 'No';
@@ -19,15 +19,6 @@ interface ReglaMuestraCC {
   cadaXEntregas: number;
   cadaXTransacciones: number;
 }
-
-// Mock Data
-const mockData: ReglaMuestraCC[] = [
-    { id: '1', expedidor: 'EXP-001', propietario: 'PROP-001', articulo: 'ART-12345', descripcion: 'Laptop Pro 15"', codigoBloqueo: 'Q-HOLD', ajustarRechazada: 'Sí', primeraRecepcion: 'No', porcentajeCantidad: 10.00, cadaXEntregas: 5, cadaXTransacciones: 0 },
-    { id: '2', expedidor: 'EXP-002', propietario: 'PROP-001', articulo: 'ART-67890', descripcion: 'Mouse Inalámbrico', codigoBloqueo: 'INSPECT', ajustarRechazada: 'No', primeraRecepcion: 'Sí', porcentajeCantidad: 100.00, cadaXEntregas: 1, cadaXTransacciones: 0 },
-    { id: '3', expedidor: 'EXP-001', propietario: 'PROP-002', articulo: 'ART-54321', descripcion: 'Teclado Mecánico', codigoBloqueo: 'Q-HOLD', ajustarRechazada: 'Sí', primeraRecepcion: 'No', porcentajeCantidad: 0.00, cadaXEntregas: 0, cadaXTransacciones: 100 },
-    { id: '4', expedidor: 'EXP-003', propietario: 'PROP-003', articulo: 'ART-11223', descripcion: 'Monitor 27" 4K', codigoBloqueo: 'NONE', ajustarRechazada: 'No', primeraRecepcion: 'No', porcentajeCantidad: 5.00, cadaXEntregas: 10, cadaXTransacciones: 0 },
-    { id: '5', expedidor: 'EXP-002', propietario: 'PROP-002', articulo: 'ART-44556', descripcion: 'Webcam HD', codigoBloqueo: 'INSPECT', ajustarRechazada: 'Sí', primeraRecepcion: 'Sí', porcentajeCantidad: 100.00, cadaXEntregas: 1, cadaXTransacciones: 0 },
-];
 
 // Constants
 const codigoBloqueoOptions = ['-----', 'Q-HOLD', 'INSPECT', 'NONE'];
@@ -65,7 +56,7 @@ const ActionButton: React.FC<{ icon: React.ReactNode, primary?: boolean, seconda
 );
 
 const ReglasMuestraCCEntrada: React.FC = () => {
-    const [data, setData] = useState<ReglaMuestraCC[]>(mockData);
+    const [data, setData] = useState<ReglaMuestraCC[]>([]);
     const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
     const [sortConfig, setSortConfig] = useState<{ key: SortableKeys; direction: 'ascending' | 'descending' } | null>(null);
     const [filters, setFilters] = useState<Record<string, string>>({});

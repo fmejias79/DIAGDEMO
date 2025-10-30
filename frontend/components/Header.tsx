@@ -19,8 +19,8 @@ const Header: React.FC<HeaderProps> = ({ toggleSidebar, toggleDarkMode, isDarkMo
         </button>
         <div className="flex-shrink-0 block">
           {/* Placeholder for company logo, displays different files for light/dark mode */}
-          <img alt="GIAD Logo" className="w-[80px] sm:w-[175px] h-[40px] sm:h-[60px] object-contain dark:hidden" src="./GIAD-lightMode.png" />
-          <img alt="GIAD Logo" className="w-[80px] sm:w-[175px] h-[40px] sm:h-[60px] object-contain hidden dark:block" src="./GIAD-darkMode.png" />
+          <img alt="GIAD Logo" className="w-[80px] sm:w-[175px] h-[40px] sm:h-[60px] object-contain dark:hidden" src=".\icons\GIAD-lightMode.png" />
+          <img alt="GIAD Logo" className="w-[80px] sm:w-[175px] h-[40px] sm:h-[60px] object-contain hidden dark:block" src=".\icons\GIAD-darkmode.png" />
         </div>
       </div>
 

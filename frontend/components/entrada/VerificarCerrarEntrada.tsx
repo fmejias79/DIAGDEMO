@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MenuIcon, PencilIcon, SearchIcon, CalendarIcon, MoreVerticalIcon } from '../constants';
+import { MenuIcon, PencilIcon, SearchIcon, CalendarIcon, MoreVerticalIcon } from '../../constants';
 
 const VerificarCerrarEntrada: React.FC = () => {
     const [filters, setFilters] = useState({

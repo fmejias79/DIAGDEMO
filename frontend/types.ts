@@ -70,3 +70,38 @@ export interface AsnRecepcionDetail {
   cantidadEsperada: number;
   cantidadRecibida: number;
 }
+
+export interface OrdenExpedicion {
+  id: string;
+  numeroOrden: string;
+  propietario: string;
+  ordenExterna1: string;
+  tipo: 'Urgente' | 'Normal' | 'Programada' | 'Express';
+  nombreReceptor: string;
+  estatus: 'Creada' | 'En Preparación' | 'Lista' | 'Expedida' | 'Entregada' | 'Cancelada';
+  fechaRealExpedicion: string;
+  fechaOrden: string;
+  receptor: string;
+  ruta: string;
+  numeroPack: number;
+  ubicacion: string;
+  actualizadoPor: string;
+}
+
+export interface DetallesExpedicion {
+  id: string;
+  numeroOrden: string;
+  numeroLinea: number;
+  prioridad: 'A' | 'M' | 'B';
+  articulo: string;
+  descripcion: string;
+  cantidadPendiente: number;
+  cantidadOrden: number;
+  cantidadPreparada: number;
+  asignado: 'Sí' | 'No' | 'Parcial';
+  preparado: 'Sí' | 'No' | 'Parcial';
+  estatus: 'Pendiente' | 'Asignado' | 'En Picking' | 'Preparado' | 'Expedido';
+  ordenExterna1: string;
+  fechaCreacion: string;
+  estrategiaAsignacion: 'FIFO' | 'LIFO' | 'Por Ubicación' | 'Por Lote';
+}

@@ -1,23 +1,10 @@
 import React, { useState, useMemo } from 'react';
-import type { PurchaseOrder as PurchaseOrderType } from '../types';
+import type { PurchaseOrder as PurchaseOrderType } from '../../types';
 import { 
   PlusIcon, DownloadIcon, UploadCloudIcon, SaveIcon, Trash2Icon, RefreshCwIcon, ArchiveIcon, ChevronDownIcon,
   ChevronsLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronsRightIcon, HelpCircleIcon, MoreVerticalIcon, CalendarIcon,
   ArrowUpIcon, ArrowDownIcon
-} from '../constants';
-
-const mockPurchaseOrders: PurchaseOrderType[] = [
-  { id: '1', ordenCompra: 'OC-2024-001', compradorPropietario: 'Juan Pérez', estatus: 'Completado', tipo: 'Estándar', fechaOrdenCompra: '2024-07-28', fechaRecepcionEsperada: '2024-08-15', proveedor: 'Innovate Tech', nOCExterna: 'EXT-98765', referenciaProveedor: 'REF-A1B2', cantidadPendiente: 0 },
-  { id: '2', ordenCompra: 'OC-2024-002', compradorPropietario: 'Maria García', estatus: 'Pendiente', tipo: 'Estándar', fechaOrdenCompra: '2024-07-29', fechaRecepcionEsperada: '2024-08-10', proveedor: 'Global Supplies', nOCExterna: 'EXT-98766', referenciaProveedor: 'REF-C3D4', cantidadPendiente: 100 },
-  { id: '3', ordenCompra: 'OC-2024-003', compradorPropietario: 'Juan Pérez', estatus: 'Recibido Parcialmente', tipo: 'Urgente', fechaOrdenCompra: '2024-07-29', fechaRecepcionEsperada: '2024-08-12', proveedor: 'Quantum Parts', nOCExterna: 'EXT-98767', referenciaProveedor: 'REF-E5F6', cantidadPendiente: 50 },
-  { id: '4', ordenCompra: 'OC-2024-004', compradorPropietario: 'Ana Torres', estatus: 'Pendiente', tipo: 'Estándar', fechaOrdenCompra: '2024-07-30', fechaRecepcionEsperada: '2024-08-20', proveedor: 'Innovate Tech', nOCExterna: 'EXT-98768', referenciaProveedor: 'REF-G7H8', cantidadPendiente: 25 },
-  { id: '5', ordenCompra: 'OC-2024-005', compradorPropietario: 'Carlos Ruiz', estatus: 'Cancelado', tipo: 'Estándar', fechaOrdenCompra: '2024-08-01', fechaRecepcionEsperada: '2024-08-18', proveedor: 'Apex Materials', nOCExterna: 'EXT-98769', referenciaProveedor: 'REF-I9J0', cantidadPendiente: 0 },
-  { id: '6', ordenCompra: 'OC-2024-006', compradorPropietario: 'Maria García', estatus: 'Pendiente', tipo: 'Devolución', fechaOrdenCompra: '2024-08-02', fechaRecepcionEsperada: '2024-08-25', proveedor: 'Global Supplies', nOCExterna: 'EXT-98770', referenciaProveedor: 'REF-K1L2', cantidadPendiente: 10 },
-  { id: '7', ordenCompra: 'OC-2024-007', compradorPropietario: 'Juan Pérez', estatus: 'Nuevo', tipo: 'Estándar', fechaOrdenCompra: '2024-08-03', fechaRecepcionEsperada: '2024-08-22', proveedor: 'Innovate Tech', nOCExterna: 'EXT-98771', referenciaProveedor: 'REF-M3N4', cantidadPendiente: 200 },
-  { id: '8', ordenCompra: 'OC-2024-008', compradorPropietario: 'Ana Torres', estatus: 'Recibido Parcialmente', tipo: 'Urgente', fechaOrdenCompra: '2024-08-05', fechaRecepcionEsperada: '2024-08-19', proveedor: 'Quantum Parts', nOCExterna: 'EXT-98772', referenciaProveedor: 'REF-O5P6', cantidadPendiente: 30 },
-  { id: '9', ordenCompra: 'OC-2024-009', compradorPropietario: 'Carlos Ruiz', estatus: 'Pendiente', tipo: 'Estándar', fechaOrdenCompra: '2024-08-06', fechaRecepcionEsperada: '2024-08-28', proveedor: 'Apex Materials', nOCExterna: 'EXT-98773', referenciaProveedor: 'REF-Q7R8', cantidadPendiente: 150 },
-  { id: '10', ordenCompra: 'OC-2024-010', compradorPropietario: 'Maria García', estatus: 'Completado', tipo: 'Estándar', fechaOrdenCompra: '2024-08-06', fechaRecepcionEsperada: '2024-08-21', proveedor: 'Global Supplies', nOCExterna: 'EXT-98774', referenciaProveedor: 'REF-S9T0', cantidadPendiente: 0 },
-];
+} from '../../constants';
 
 const statusStyles: Record<PurchaseOrderType['estatus'], string> = {
   Pendiente: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/50 dark:text-yellow-300',
@@ -61,7 +48,7 @@ const ActionButton: React.FC<{ icon: React.ReactNode, primary?: boolean, [key: s
 );
 
 const PurchaseOrder: React.FC = () => {
-    const [orders, setOrders] = useState<PurchaseOrderType[]>(mockPurchaseOrders);
+    const [orders, setOrders] = useState<PurchaseOrderType[]>([]);
     const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
     const [sortConfig, setSortConfig] = useState<{ key: SortableKeys; direction: 'ascending' | 'descending' } | null>(null);
     const [filters, setFilters] = useState<Record<string, string>>({});

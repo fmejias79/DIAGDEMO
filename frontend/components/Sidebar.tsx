@@ -45,7 +45,7 @@ const RecursiveMenuItem: React.FC<RecursiveMenuItemProps> = ({
         >
           <div className="flex items-start gap-2 flex-1 mr-2">
             {item.icon && <span className="text-gray-500 dark:text-gray-400 flex-shrink-0 pt-0.5">{item.icon}</span>}
-            <span className="text-lg">{item.label}</span>
+            <span className="text-lg whitespace-nowrap">{item.label}</span>
           </div>
           <div className="flex-shrink-0 pt-0.5">
             {isMenuOpen ? (
@@ -101,7 +101,7 @@ const RecursiveMenuItem: React.FC<RecursiveMenuItemProps> = ({
     >
       {isActive && <span className="absolute left-0 top-1 bottom-1 w-1 bg-blue-500 rounded-r-full" aria-hidden="true" />}
       {item.icon && <span className="text-gray-500 dark:text-gray-400 flex-shrink-0">{item.icon}</span>}
-      <span>{item.label}</span>
+      <span className="whitespace-nowrap">{item.label}</span>
     </a>
   );
 };
@@ -168,7 +168,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isMobile, isDesktopOpen, isMobileOpen
       `}
     >
       {/* This wrapper ensures content doesn't wrap during collapse animation on desktop */}
-      <div className="w-[280px] h-full flex flex-col overflow-hidden">
+      <div className="w-full h-full flex flex-col overflow-hidden">
         <div className="p-2 flex-shrink-0">
           <div className="relative">
             <SearchIcon className="absolute left-2 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
@@ -199,7 +199,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isMobile, isDesktopOpen, isMobileOpen
             <div className="w-5 h-5 rounded-full flex items-center justify-center bg-gray-300 dark:bg-gray-600">
               <UserIcon className="w-2.5 h-2.5" />
             </div>
-            <span>Usuario Admin</span>
+            <span className="whitespace-nowrap">Usuario Admin</span>
           </div>
         </div>
       </div>

@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { RefreshCwIcon, CalendarIcon, PencilIcon } from '../constants';
+import { RefreshCwIcon, CalendarIcon, PencilIcon } from '../../constants';
 
 const ActionButton: React.FC<{ icon: React.ReactNode, primary?: boolean, [key: string]: any }> = ({ icon, children, primary = false, ...props }) => (
   <button
@@ -36,15 +36,15 @@ const GraficosEntrada: React.FC = () => {
 
   const handleUpdate = useCallback(() => {
     // In a real app, you would fetch and process data here based on the filters.
-    // For this mock, we'll show chart placeholders if any chart type is selected,
-    // otherwise, we'll show the "no data" message.
+    // For now, we'll show chart placeholders if any chart type is selected.
     if (chartType1 && chartType1 !== '-----' || chartType2 && chartType2 !== '-----') {
         setShowNoDataMessage(false);
+        // Set an empty structure for the chart placeholder, data would be fetched from an API.
         setChartData({
-            labels: ['Día 1', 'Día 2', 'Día 3', 'Día 4'],
+            labels: [],
             datasets: [{
                 label: 'Recepciones',
-                data: [12, 19, 3, 5],
+                data: [],
                 backgroundColor: 'rgba(54, 162, 235, 0.6)',
                 borderColor: 'rgba(54, 162, 235, 1)',
                 borderWidth: 1
@@ -54,7 +54,7 @@ const GraficosEntrada: React.FC = () => {
         setShowNoDataMessage(true);
         setChartData(null);
     }
-  }, [chartType1, chartType2, endDate, numDays, includeClosed]);
+  }, [chartType1, chartType2]);
 
   // A placeholder component to visually represent a chart without a real charting library
   const ChartPlaceholder: React.FC<{ type: string; data: any }> = ({ type, data }) => {
@@ -68,13 +68,17 @@ const GraficosEntrada: React.FC = () => {
     return (
        <div className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg h-full min-h-[300px] w-full">
           <h3 className="text-lg font-semibold text-center mb-4 text-gray-800 dark:text-gray-200">{type}</h3>
-          <div className="flex items-end justify-around h-64 bg-gray-50 dark:bg-gray-900/50 p-2 rounded">
-            {data.datasets[0].data.map((val: number, index: number) => (
+          <div className="flex items-end justify-around h-64 bg-gray-50 dark:bg-gray-900/50 p-2 rounded items-center">
+            {data.datasets[0].data.length > 0 ? (
+                data.datasets[0].data.map((val: number, index: number) => (
               <div key={index} className="flex flex-col items-center justify-end w-1/5 h-full">
                  <div title={`${data.labels[index]}: ${val}`} className="w-full bg-blue-500 hover:bg-blue-400 transition-colors" style={{ height: `${val * 10}px` }}></div>
                  <span className="text-xs mt-2 text-gray-600 dark:text-gray-400">{data.labels[index]}</span>
               </div>
-            ))}
+            ))
+            ) : (
+                <p className="text-gray-500 dark:text-gray-400">Sin datos para mostrar en el gráfico.</p>
+            )}
           </div>
        </div>
     );

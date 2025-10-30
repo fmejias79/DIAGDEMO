@@ -1,69 +1,40 @@
 import React, { useState, useMemo } from 'react';
 import { 
-    SaveIcon, RefreshCwIcon, ChevronsLeftIcon, ChevronLeftIcon, ChevronRightIcon, ChevronsRightIcon, 
-    DownloadIcon, HelpCircleIcon, MinusIcon, MoreVerticalIcon, ArrowUpIcon, ArrowDownIcon, MoreHorizontalIcon
-} from '../constants';
+    FileSpreadsheetIcon, PlusIcon, SaveIcon, Trash2Icon, ChevronsLeftIcon, ChevronLeftIcon, 
+    ChevronRightIcon, ChevronsRightIcon, RefreshCwIcon, HelpCircleIcon, MinusIcon, MoreVerticalIcon, 
+    ArrowUpIcon, ArrowDownIcon, CalendarIcon
+} from '../../constants';
 
 // Types
-type EstatusCC = 'Pendiente' | 'En Inspección' | 'Aprobado' | 'Rechazado';
-type AjusteAutomatico = '-----' | 'Sí' | 'No';
-type Disposicion = '-----' | 'Aceptar' | 'Rechazar' | 'Cuarentena' | 'Devolución';
-type MotivoRechazo = '-----' | 'Dañado' | 'Incorrecto' | 'Incompleto' | 'Caducado';
+type CategoriaCumplimiento = 'Calidad' | 'Entrega' | 'Documentación' | 'Certificaciones';
 
-interface EntradaCCItem {
+interface CumplimientoProveedor {
   id: string;
-  recepcion: string;
-  linea: number;
-  propietario: string;
-  articulo: string;
-  lpn: string;
-  cantidadRecibida: number;
-  cantidadAInspeccionar: number;
-  cantidadInspeccionada: number;
-  estatusCC: EstatusCC;
-  motivoRechazo: MotivoRechazo | null;
-  cantidadRechazada: number;
-  lpnCuarentena: string | null;
-  ajusteAutomatico: AjusteAutomatico;
-  inspeccionadoPor: string | null;
-  disposicion: Disposicion | null;
+  expedidor: string;
+  numeroASN: string;
+  secuencia: number;
+  categoria: CategoriaCumplimiento;
+  preguntaCumplimiento: string;
+  respuestaContestacion: string;
+  fecha: string; // YYYY-MM-DD
+  contestadoPor: string;
 }
 
-// Mock Data
-const mockData: EntradaCCItem[] = [
-    { id: '1', recepcion: 'ASN-001', linea: 1, propietario: 'Juan Pérez', articulo: 'ART-001', lpn: 'LPN001', cantidadRecibida: 100, cantidadAInspeccionar: 100, cantidadInspeccionada: 0, estatusCC: 'Pendiente', motivoRechazo: null, cantidadRechazada: 0, lpnCuarentena: null, ajusteAutomatico: '-----', inspeccionadoPor: null, disposicion: null },
-    { id: '2', recepcion: 'ASN-001', linea: 2, propietario: 'Juan Pérez', articulo: 'ART-002', lpn: 'LPN002', cantidadRecibida: 50, cantidadAInspeccionar: 50, cantidadInspeccionada: 50, estatusCC: 'Aprobado', motivoRechazo: null, cantidadRechazada: 0, lpnCuarentena: null, ajusteAutomatico: 'Sí', inspeccionadoPor: 'admin', disposicion: 'Aceptar' },
-    { id: '3', recepcion: 'ASN-002', linea: 1, propietario: 'Maria García', articulo: 'ART-003', lpn: 'LPN003', cantidadRecibida: 200, cantidadAInspeccionar: 100, cantidadInspeccionada: 100, estatusCC: 'Rechazado', motivoRechazo: 'Dañado', cantidadRechazada: 20, lpnCuarentena: 'LPN-CUAR-001', ajusteAutomatico: 'Sí', inspeccionadoPor: 'inspector01', disposicion: 'Rechazar' },
-    { id: '4', recepcion: 'ASN-003', linea: 1, propietario: 'Ana Torres', articulo: 'ART-004', lpn: 'LPN004', cantidadRecibida: 75, cantidadAInspeccionar: 75, cantidadInspeccionada: 0, estatusCC: 'Pendiente', motivoRechazo: null, cantidadRechazada: 0, lpnCuarentena: null, ajusteAutomatico: '-----', inspeccionadoPor: null, disposicion: null },
-    { id: '5', recepcion: 'ASN-004', linea: 1, propietario: 'Carlos Ruiz', articulo: 'ART-005', lpn: 'LPN005', cantidadRecibida: 120, cantidadAInspeccionar: 120, cantidadInspeccionada: 120, estatusCC: 'En Inspección', motivoRechazo: null, cantidadRechazada: 0, lpnCuarentena: null, ajusteAutomatico: 'No', inspeccionadoPor: 'inspector02', disposicion: 'Cuarentena' },
+// Constants for filters
+const categoriaOptions: CategoriaCumplimiento[] = ['Calidad', 'Entrega', 'Documentación', 'Certificaciones'];
+
+type SortableKeys = keyof CumplimientoProveedor;
+
+const columns: { key: SortableKeys, label: string, filterType: 'text' | 'select' | 'number' | 'date', options?: any[] }[] = [
+    { key: 'expedidor', label: 'Expedidor', filterType: 'text' },
+    { key: 'numeroASN', label: 'Número de ASN', filterType: 'text' },
+    { key: 'secuencia', label: 'Secuencia', filterType: 'number' },
+    { key: 'categoria', label: 'Categoría', filterType: 'select', options: categoriaOptions },
+    { key: 'preguntaCumplimiento', label: 'Pregunta de cumplimiento del proveedor', filterType: 'text' },
+    { key: 'respuestaContestacion', label: 'Respuesta/Contestación', filterType: 'text' },
+    { key: 'fecha', label: 'Fecha', filterType: 'date' },
+    { key: 'contestadoPor', label: 'Contestado por', filterType: 'text' },
 ];
-
-// Constants
-const estatusCCOptions: EstatusCC[] = ['Pendiente', 'En Inspección', 'Aprobado', 'Rechazado'];
-const motivoRechazoOptions: MotivoRechazo[] = ['-----','Dañado', 'Incorrecto', 'Incompleto', 'Caducado'];
-const ajusteAutomaticoOptions: AjusteAutomatico[] = ['-----', 'Sí', 'No'];
-const disposicionOptions: Disposicion[] = ['-----','Aceptar', 'Rechazar', 'Cuarentena', 'Devolución'];
-
-type SortableKeys = keyof EntradaCCItem;
-
-const columns: { key: SortableKeys, label: string, filterType: 'text' | 'select' | 'number', options?: any[] }[] = [
-    { key: 'recepcion', label: 'Recepción', filterType: 'text' },
-    { key: 'linea', label: 'N° de línea', filterType: 'number' },
-    { key: 'propietario', label: 'Propietario', filterType: 'text' },
-    { key: 'articulo', label: 'Artículo', filterType: 'text' },
-    { key: 'lpn', label: 'LPN', filterType: 'text' },
-    { key: 'cantidadRecibida', label: 'Cantidad recibida', filterType: 'number' },
-    { key: 'cantidadAInspeccionar', label: 'Cantidad a inspeccionar', filterType: 'number' },
-    { key: 'cantidadInspeccionada', label: 'Cantidad inspeccionada', filterType: 'number' },
-    { key: 'estatusCC', label: 'Estatus CC', filterType: 'select', options: estatusCCOptions },
-    { key: 'motivoRechazo', label: 'Motivo de rechazo', filterType: 'select', options: motivoRechazoOptions },
-    { key: 'cantidadRechazada', label: 'Cantidad rechazada', filterType: 'number' },
-    { key: 'lpnCuarentena', label: 'LPN cuarentena', filterType: 'text' },
-    { key: 'ajusteAutomatico', label: 'Ajuste automático', filterType: 'select', options: ajusteAutomaticoOptions },
-    { key: 'inspeccionadoPor', label: 'Inspeccionado por', filterType: 'text' },
-    { key: 'disposicion', label: 'Disposición', filterType: 'select', options: disposicionOptions },
-];
-
 
 const ActionButton: React.FC<{ icon: React.ReactNode, primary?: boolean, [key: string]: any }> = ({ icon, children, primary = false, ...props }) => (
   <button
@@ -79,13 +50,13 @@ const ActionButton: React.FC<{ icon: React.ReactNode, primary?: boolean, [key: s
   </button>
 );
 
-const EntradaCC: React.FC = () => {
-    const [data, setData] = useState<EntradaCCItem[]>(mockData);
+const RegistroCumplimientoProveedor: React.FC = () => {
+    const [data, setData] = useState<CumplimientoProveedor[]>([]);
     const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set());
     const [sortConfig, setSortConfig] = useState<{ key: SortableKeys; direction: 'ascending' | 'descending' } | null>(null);
     const [filters, setFilters] = useState<Record<string, string>>({});
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 5;
+    const itemsPerPage = 10;
 
     const handleFilterChange = (key: string, value: string) => {
         setFilters(prev => ({ ...prev, [key]: value }));
@@ -111,9 +82,9 @@ const EntradaCC: React.FC = () => {
         return data.filter(item => {
             return Object.entries(filters).every(([key, value]) => {
                 if (!value || value === '-----') return true;
-                const itemValue = item[key as keyof EntradaCCItem];
+                const itemValue = item[key as keyof CumplimientoProveedor];
                 if (itemValue === null || itemValue === undefined) return false;
-                return String(itemValue).toLowerCase().includes((value as string).toLowerCase());
+                return String(itemValue).toLowerCase().includes(String(value).toLowerCase());
             });
         });
     }, [data, filters]);
@@ -146,13 +117,16 @@ const EntradaCC: React.FC = () => {
       else paginatedData.forEach(o => newSelection.delete(o.id));
       setSelectedRows(newSelection);
     };
-    
+
   return (
     <div className="rounded-xl border shadow-sm bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 p-4 sm:p-6 flex flex-col gap-4 h-full">
         {/* Top Action Bar */}
         <div className="flex flex-wrap items-center gap-2">
-            <ActionButton icon={<SaveIcon className="w-4 h-4" />} primary>GUARDAR</ActionButton>
-            <ActionButton icon={<RefreshCwIcon className="w-4 h-4" />}>ACTUALIZAR</ActionButton>
+            <ActionButton icon={<FileSpreadsheetIcon className="w-4 h-4" />} primary>EXPORTAR A EXCEL</ActionButton>
+            <div className="h-6 w-px bg-gray-300 dark:bg-gray-600 mx-2"></div>
+            <ActionButton icon={<PlusIcon className="w-4 h-4" />}>NUEVO</ActionButton>
+            <ActionButton icon={<SaveIcon className="w-4 h-4" />}>GUARDAR</ActionButton>
+            <ActionButton icon={<Trash2Icon className="w-4 h-4" />}>ELIMINAR</ActionButton>
         </div>
 
         {/* Navigation and Controls */}
@@ -160,14 +134,15 @@ const EntradaCC: React.FC = () => {
             <div className="flex items-center gap-1">
                 <button onClick={() => setCurrentPage(1)} disabled={currentPage === 1} className="p-1.5 disabled:opacity-50 text-gray-600 dark:text-gray-300"><ChevronsLeftIcon className="w-4 h-4" /></button>
                 <button onClick={() => setCurrentPage(p => Math.max(1, p - 1))} disabled={currentPage === 1} className="p-1.5 disabled:opacity-50 text-gray-600 dark:text-gray-300"><ChevronLeftIcon className="w-4 h-4" /></button>
-                <span className="text-sm px-2 text-gray-700 dark:text-gray-300">Página {currentPage} de {totalPages || 1}</span>
                 <button onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))} disabled={currentPage >= totalPages} className="p-1.5 disabled:opacity-50 text-gray-600 dark:text-gray-300"><ChevronRightIcon className="w-4 h-4" /></button>
                 <button onClick={() => setCurrentPage(totalPages)} disabled={currentPage >= totalPages} className="p-1.5 disabled:opacity-50 text-gray-600 dark:text-gray-300"><ChevronsRightIcon className="w-4 h-4" /></button>
                 <button className="p-1.5 ml-2 text-gray-600 dark:text-gray-300"><RefreshCwIcon className="w-4 h-4" /></button>
             </div>
             <div className="flex items-center gap-2">
-                <ActionButton icon={<MoreHorizontalIcon className="w-4 h-4" />}>MÁS CAMPOS</ActionButton>
-                <ActionButton icon={<DownloadIcon className="w-4 h-4" />}>EXPORTAR</ActionButton>
+                <span className="text-sm text-gray-700 dark:text-gray-300">
+                    {paginatedData.length > 0 ? (currentPage - 1) * itemsPerPage + 1 : 0}-
+                    {Math.min(currentPage * itemsPerPage, sortedData.length)} de {sortedData.length}
+                </span>
                 <button className="p-1.5"><HelpCircleIcon className="w-5 h-5 text-gray-400" /></button>
                 <button className="p-1.5 text-gray-600 dark:text-gray-300"><MinusIcon className="w-4 h-4" /></button>
                  <button className="p-1.5 text-gray-600 dark:text-gray-300"><MoreVerticalIcon className="w-4 h-4" /></button>
@@ -178,7 +153,7 @@ const EntradaCC: React.FC = () => {
             <table className="min-w-full border-separate border-spacing-0">
                 <thead className="bg-gray-50 dark:bg-gray-700 sticky top-0 z-10">
                     <tr>
-                        <th scope="col" className="px-4 py-2 text-left text-sm font-medium text-gray-500 dark:text-gray-300 border-b border-gray-200 dark:border-gray-600">
+                        <th scope="col" className="px-4 py-2 bg-gray-50 dark:bg-gray-700 border-b border-gray-200 dark:border-gray-600">
                             <input type="checkbox" onChange={handleSelectAllOnPage} checked={isAllSelectedOnPage} className="rounded border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 text-blue-600 focus:ring-blue-500" />
                         </th>
                         {columns.map(col => (
@@ -191,14 +166,20 @@ const EntradaCC: React.FC = () => {
                                 </div>
                             </th>
                         ))}
-                         <th scope="col" className="px-4 py-2 border-b border-gray-200 dark:border-gray-600"><span className="sr-only">Acciones</span></th>
+                         <th scope="col" className="px-4 py-2 border-b border-gray-200 dark:border-gray-600 bg-gray-50 dark:bg-gray-700"><span className="sr-only">Acciones</span></th>
                     </tr>
                     <tr>
-                        <th className="p-1 border-b border-gray-300 dark:border-gray-500"></th>
+                        <th className="p-1 bg-gray-50 dark:bg-gray-700 border-b border-gray-300 dark:border-gray-500"></th>
                         {columns.map(col => (
                             <th key={`${col.key}-filter`} className="px-2 py-1 font-normal border-b border-gray-300 dark:border-gray-500">
                                 {col.filterType === 'text' && <input type="text" onChange={(e) => handleFilterChange(col.key, e.target.value)} className="w-full text-sm border rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500 p-1" />}
                                 {col.filterType === 'number' && <input type="number" onChange={(e) => handleFilterChange(col.key, e.target.value)} className="w-full text-sm border rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500 p-1" />}
+                                {col.filterType === 'date' && (
+                                    <div className="relative">
+                                        <input type="date" onChange={(e) => handleFilterChange(col.key, e.target.value)} className="w-full text-sm border rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500 p-1 pr-7" />
+                                        <CalendarIcon className="w-3 h-3 absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                                    </div>
+                                )}
                                 {col.filterType === 'select' && (
                                     <select onChange={(e) => handleFilterChange(col.key, e.target.value)} className="w-full text-sm border rounded-md bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 border-gray-300 dark:border-gray-600 focus:ring-blue-500 focus:border-blue-500 p-1">
                                         <option value="">-----</option>
@@ -207,7 +188,7 @@ const EntradaCC: React.FC = () => {
                                 )}
                             </th>
                         ))}
-                        <th className="p-1 border-b border-gray-300 dark:border-gray-500"></th>
+                        <th className="p-1 bg-gray-50 dark:bg-gray-700 border-b border-gray-300 dark:border-gray-500"></th>
                     </tr>
                 </thead>
                 <tbody className="bg-white dark:bg-gray-800">
@@ -221,7 +202,7 @@ const EntradaCC: React.FC = () => {
                                     <input type="checkbox" checked={selectedRows.has(item.id)} onChange={() => handleSelectRow(item.id)} className="rounded border-gray-300 dark:border-gray-600 bg-transparent text-blue-600 focus:ring-blue-500"/>
                                 </td>
                                 {columns.map(col => (
-                                <td key={col.key} className="px-4 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200 border-t border-gray-200 dark:border-gray-700">{item[col.key as keyof EntradaCCItem] ?? ''}</td>
+                                <td key={col.key} className="px-4 py-2 whitespace-nowrap text-sm text-gray-800 dark:text-gray-200 border-t border-gray-200 dark:border-gray-700">{item[col.key as keyof CumplimientoProveedor]}</td>
                                 ))}
                                 <td className="px-4 py-2 whitespace-nowrap text-center text-sm font-medium border-t border-gray-200 dark:border-gray-700">
                                     <button className="p-1 rounded-full hover:bg-gray-200 dark:hover:bg-gray-500 text-gray-500 dark:text-gray-400">
@@ -242,4 +223,4 @@ const EntradaCC: React.FC = () => {
   );
 };
 
-export default EntradaCC;
+export default RegistroCumplimientoProveedor;
