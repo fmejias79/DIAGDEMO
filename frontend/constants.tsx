@@ -237,7 +237,18 @@ export const MENU_ITEMS: MenuItem[] = [
           { key: 'wms-salida-transferencia', label: 'Transferencia de instalación', icon: <ShuffleIcon style={iconStyle} />, path: '/wms/salida/transferencia' },
           { key: 'wms-salida-detalles-cont', label: 'Detalles del contenedor', icon: <BoxIcon style={iconStyle} />, path: '/wms/salida/detalles-cont' },
           { key: 'wms-salida-muelles', label: 'Asignaciones de muelles', icon: <MapPinIcon style={iconStyle} />, path: '/wms/salida/muelles' },
-          { key: 'wms-salida-carga', label: 'Administración de carga', icon: <PackageIcon style={iconStyle} />, path: '/wms/salida/carga' },
+          { 
+            key: 'wms-salida-carga', 
+            label: 'Administración de carga', 
+            icon: <BoxIcon style={iconStyle} />,
+            subItems: [
+              { key: 'wms-salida-carga-programaciones', label: 'Programaciones ruta', icon: <MinusIcon style={iconStyle} />, path: '/wms/salida/carga/programaciones' },
+              { key: 'wms-salida-carga-creacion', label: 'Creación de carga', icon: <MinusIcon style={iconStyle} />, path: '/wms/salida/carga/creacion' },
+              { key: 'wms-salida-carga-mantenimiento', label: 'Mantenimiento', icon: <MinusIcon style={iconStyle} />, path: '/wms/salida/carga/mantenimiento' },
+              { key: 'wms-salida-carga-estatus', label: 'Estatus', icon: <MinusIcon style={iconStyle} />, path: '/wms/salida/carga/estatus' },
+              { key: 'wms-salida-carga-informes', label: 'Informes', icon: <MinusIcon style={iconStyle} />, path: '/wms/salida/carga/informes' },
+            ]
+          },
           { key: 'wms-salida-desasignar', label: 'Desasignar', icon: <XIcon style={iconStyle} />, path: '/wms/salida/desasignar' },
           { key: 'wms-salida-control-calidad', label: 'Paquete/Control de Calidad', icon: <ShieldCheckIcon style={iconStyle} />, path: '/wms/salida/control-calidad' },
           { key: 'wms-salida-control', label: 'Control de salida', icon: <ShieldIcon style={iconStyle} />, path: '/wms/salida/control' },

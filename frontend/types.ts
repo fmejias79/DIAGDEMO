@@ -149,3 +149,16 @@ export interface TransferenciaInstalacion {
     numeroRecepcion: number;
     fechaExpedicionSolicitada: string; // YYYY-MM-DD
 }
+
+export interface DetallesContenedor {
+  id: string;
+  idCaja: string;
+  codigoDetallePreparacion: string;
+  idDeposito: string;
+  idContenedorAD: string;
+  articulo: string;
+  cantidad: number;
+  estatus: 'Activo' | 'Inactivo' | 'Pendiente' | 'Procesado' | 'Completado';
+  contenedorExterno: string;
+  estatusEtiqueta: 'Sin Etiqueta' | 'Etiquetado' | 'Pendiente Etiqueta' | 'Error Etiqueta';
+}

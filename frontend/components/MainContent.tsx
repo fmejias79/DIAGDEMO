@@ -16,6 +16,7 @@ import DetallesPreparacion from './salida/DetallesPreparacion';
 import AsignacionDemanda from './salida/AsignacionDemanda';
 import GraficosSalida from './salida/GraficosSalida';
 import TransferenciaInstalacion from './salida/TransferenciaInstalacion';
+import DetallesContenedor from './salida/DetallesContenedor';
 
 interface MainContentProps {
   activePath: string | null;
@@ -59,6 +60,8 @@ const MainContent: React.FC<MainContentProps> = ({ activePath }) => {
         return <GraficosSalida />;
       case '/wms/salida/transferencia':
         return <TransferenciaInstalacion />;
+      case '/wms/salida/detalles-cont':
+        return <DetallesContenedor />;
       default:
         return (
           <div className="rounded-xl border shadow-sm bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 p-4 sm:p-6 md:p-8">

@@ -38,16 +38,16 @@ const RecursiveMenuItem: React.FC<RecursiveMenuItemProps> = ({
       <div className={`w-full ${level === 0 ? 'mb-2' : ''}`}>
         <div
           onClick={() => onMenuToggle(item.key)}
-          className="flex items-start justify-between py-2 px-2 rounded transition-all cursor-pointer select-none text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
+          className="flex items-center justify-between py-2 px-2 rounded transition-all cursor-pointer select-none text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
           style={{ marginLeft: `${paddingLeft}px` }}
           role="button"
           aria-expanded={isMenuOpen}
         >
-          <div className="flex items-start gap-2 flex-1 mr-2">
-            {item.icon && <span className="text-gray-500 dark:text-gray-400 flex-shrink-0 pt-0.5">{item.icon}</span>}
-            <span className="text-lg whitespace-nowrap">{item.label}</span>
+          <div className="flex items-center gap-2 flex-1 mr-2 min-w-0">
+            {item.icon && <span className="text-gray-500 dark:text-gray-400 flex-shrink-0">{item.icon}</span>}
+            <span className="text-lg whitespace-nowrap truncate">{item.label}</span>
           </div>
-          <div className="flex-shrink-0 pt-0.5">
+          <div className="flex-shrink-0">
             {isMenuOpen ? (
               <ChevronDownIcon className="w-4 h-4 text-gray-400" />
             ) : (
